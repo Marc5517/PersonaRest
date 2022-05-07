@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PersonaRest.DBUtil;
 using PersonaRest.Model;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace PersonaRest.Controllers
     [ApiController]
     public class PersonasController : ControllerBase
     {
+        private string connectionString = ConnectionString.connectionString;
+
         private static readonly List<Persona> Personas = new List<Persona>()
         {
             new Persona(1, "Arsene", 1, "Fool"),
@@ -28,7 +31,9 @@ namespace PersonaRest.Controllers
         [HttpGet]
         public IEnumerable<Persona> Get()
         {
-            return Personas;
+            ManagePersona mp = new ManagePersona();
+            return mp.Get();
+            //return Personas;
         }
 
         // GET api/<PersonasController>/5
