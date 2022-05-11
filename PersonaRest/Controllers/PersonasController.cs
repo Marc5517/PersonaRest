@@ -18,13 +18,13 @@ namespace PersonaRest.Controllers
 
         private static readonly List<Persona> Personas = new List<Persona>()
         {
-            new Persona(1, "Arsene", 1, "Fool"),
-            new Persona(2, "Pixie", 2, "Lovers"),
-            new Persona(3, "Jack O' Lantern", 2, "Magician"),
-            new Persona(4, "Zorro", 3, "Magician"),
-            new Persona(5, "Bicorn", 4, "Hermit"),
-            new Persona(6, "Agathion", 3, "Chariot"),
-            new Persona(7, "Captain Kidd", 5, "Chariot")
+            new Persona(1, "Arsene", 1, "Fool", 0),
+            new Persona(2, "Pixie", 2, "Lovers", 6),
+            new Persona(3, "Jack O' Lantern", 2, "Magician", 1),
+            new Persona(4, "Zorro", 3, "Magician", 1),
+            new Persona(5, "Bicorn", 4, "Hermit", 9),
+            new Persona(6, "Agathion", 3, "Chariot", 7),
+            new Persona(7, "Captain Kidd", 5, "Chariot", 7)
         };
 
         // GET: api/<PersonasController>

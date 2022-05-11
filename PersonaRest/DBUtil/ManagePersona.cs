@@ -98,6 +98,7 @@ namespace PersonaRest.DBUtil
             persona.Name = reader.GetString(1);
             persona.Level = reader.GetInt32(2);
             persona.Arcana = reader.GetString(3);
+            persona.ArcanaNo = reader.GetInt32(4);
 
             return persona;
         }

@@ -11,18 +11,20 @@ namespace PersonaRest.Model
         private string _name;
         private int _level;
         private string _arcana;
+        private int _arcanaNo;
 
         public Persona()
         {
 
         }
 
-        public Persona(int personaId, string name, int level, string arcana)
+        public Persona(int personaId, string name, int level, string arcana, int arcanaNo)
         {
             _personaId = personaId;
             _name = name;
             _level = level;
             _arcana = arcana;
+            _arcanaNo = arcanaNo;
         }
 
         public int PersonaId
@@ -61,9 +63,18 @@ namespace PersonaRest.Model
             }
         }
 
+        public int ArcanaNo
+        {
+            get => _arcanaNo;
+            set
+            {
+                _arcanaNo = value;
+            }
+        }
+
         public override string ToString()
         {
-            return $"{nameof(PersonaId)}: {_personaId}, {nameof(Name)}: {_name}, {nameof(Level)}: {_level}, {nameof(Arcana)}: {_arcana}";
+            return $"{nameof(PersonaId)}: {_personaId}, {nameof(Name)}: {_name}, {nameof(Level)}: {_level}, {nameof(Arcana)}: {_arcana}, {nameof(ArcanaNo)}: {_arcanaNo}";
         }
     }
 }
