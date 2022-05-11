@@ -48,8 +48,10 @@ namespace PersonaRest.Controllers
         [Route("arcana/{arcana}")]
         public IEnumerable<Persona> GetByArcana(string arcana)
         {
-            List<Persona> lPersonas = Personas.FindAll(p => p.Arcana.Equals(arcana));
-            return lPersonas;
+            ManagePersona mp = new ManagePersona();
+            return mp.GetByArcana(arcana);
+            //List<Persona> lPersonas = Personas.FindAll(p => p.Arcana.Equals(arcana));
+            //return lPersonas;
         }
 
         [HttpGet]
@@ -64,9 +66,11 @@ namespace PersonaRest.Controllers
         [Route("level/{level}/arcana/{arcana}")]
         public IEnumerable<Persona> GetByLevelAndArcana(int level, string arcana)
         {
-            List<Persona> lPersonas = Personas.FindAll(p => p.Level.Equals(level));
-            List<Persona> lXPersonas = lPersonas.FindAll(p => p.Arcana.Equals(arcana));
-            return lXPersonas;
+            ManagePersona mp = new ManagePersona();
+            return mp.GetByLevelAndArcana(level, arcana);
+            //List<Persona> lPersonas = Personas.FindAll(p => p.Level.Equals(level));
+            //List<Persona> lXPersonas = lPersonas.FindAll(p => p.Arcana.Equals(arcana));
+            //return lXPersonas;
         }
 
         // POST api/<PersonasController>

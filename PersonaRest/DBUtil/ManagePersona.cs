@@ -34,6 +34,62 @@ namespace PersonaRest.DBUtil
             return liste;
         }
 
+        private const String Get_By_Arcana = "select * from Persona WHERE Arcana LIKE @arcana";
+
+        public IEnumerable<Persona> GetByArcana(string arcana)
+        {
+            List<Persona> pList = new List<Persona>();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(Get_By_Arcana, conn))
+                {
+                    cmd.Parameters.AddWithValue("@arcana", $"%{arcana}%");
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Persona per = ReadNextElement(reader);
+                        pList.Add(per);
+                    }
+                    reader.Close();
+                }
+            }
+
+            return pList;
+
+        }
+
+        private const String Get_By_Level_And_Arcana =
+            "select * from Persona WHERE Level = @level AND Arcana LIKE @arcana";
+
+        public IEnumerable<Persona> GetByLevelAndArcana(int level, string arcana)
+        {
+            List<Persona> pList = new List<Persona>();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(Get_By_Level_And_Arcana, conn))
+                {
+                    cmd.Parameters.AddWithValue("@level", level);
+                    cmd.Parameters.AddWithValue("@arcana", $"{arcana}");
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Persona per = ReadNextElement(reader);
+                        pList.Add(per);
+                    }
+                    reader.Close();
+                }
+            }
+
+            return pList;
+
+        }
+
         private Persona ReadNextElement(SqlDataReader reader)
         {
             Persona persona = new Persona();
