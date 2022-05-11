@@ -34,7 +34,7 @@ namespace PersonaRest.DBUtil
             return liste;
         }
 
-        private const String Get_By_Arcana = "select * from Persona WHERE Arcana LIKE @arcana";
+        private const String Get_By_Arcana = "select * from Persona WHERE Arcana IN (@arcana)";
 
         public IEnumerable<Persona> GetByArcana(string arcana)
         {
@@ -46,7 +46,7 @@ namespace PersonaRest.DBUtil
 
                 using (SqlCommand cmd = new SqlCommand(Get_By_Arcana, conn))
                 {
-                    cmd.Parameters.AddWithValue("@arcana", $"%{arcana}%");
+                    cmd.Parameters.AddWithValue("@arcana", $"{arcana}");
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
@@ -61,8 +61,7 @@ namespace PersonaRest.DBUtil
 
         }
 
-        private const String Get_By_Level_And_Arcana =
-            "select * from Persona WHERE Level = @level AND Arcana LIKE @arcana";
+        private const String Get_By_Level_And_Arcana = "select * from Persona WHERE Level = @level AND Arcana IN (@arcana)";
 
         public IEnumerable<Persona> GetByLevelAndArcana(int level, string arcana)
         {
@@ -88,6 +87,52 @@ namespace PersonaRest.DBUtil
 
             return pList;
 
+        }
+
+        private const String Get_In_Arcana = "Select * From Persona Order by ArcanaNo";
+
+        public IEnumerable<Persona> GetInArcana()
+        {
+            List<Persona> liste = new List<Persona>();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(Get_In_Arcana, conn))
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Persona per = ReadNextElement(reader);
+                    liste.Add(per);
+                }
+
+                reader.Close();
+            }
+
+            return liste;
+        }
+
+        private const String Get_In_ABC = "Select * From Persona Order by Name";
+
+        public IEnumerable<Persona> GetInABC()
+        {
+            List<Persona> liste = new List<Persona>();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(Get_In_ABC, conn))
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Persona per = ReadNextElement(reader);
+                    liste.Add(per);
+                }
+
+                reader.Close();
+            }
+
+            return liste;
         }
 
         private Persona ReadNextElement(SqlDataReader reader)

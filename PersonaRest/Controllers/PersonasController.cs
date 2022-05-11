@@ -14,7 +14,6 @@ namespace PersonaRest.Controllers
     [ApiController]
     public class PersonasController : ControllerBase
     {
-        private string connectionString = ConnectionString.connectionString;
 
         private static readonly List<Persona> Personas = new List<Persona>()
         {
@@ -26,6 +25,7 @@ namespace PersonaRest.Controllers
             new Persona(6, "Agathion", 3, "Chariot", 7),
             new Persona(7, "Captain Kidd", 5, "Chariot", 7)
         };
+
 
         // GET: api/<PersonasController>
         [HttpGet]
@@ -71,6 +71,22 @@ namespace PersonaRest.Controllers
             //List<Persona> lPersonas = Personas.FindAll(p => p.Level.Equals(level));
             //List<Persona> lXPersonas = lPersonas.FindAll(p => p.Arcana.Equals(arcana));
             //return lXPersonas;
+        }
+
+        [HttpGet]
+        [Route("arcanaNo")]
+        public IEnumerable<Persona> GetInArcana()
+        {
+            ManagePersona mp = new ManagePersona();
+            return mp.GetInArcana();
+        }
+
+        [HttpGet]
+        [Route("abc")]
+        public IEnumerable<Persona> GetInABC()
+        {
+            ManagePersona mp = new ManagePersona();
+            return mp.GetInABC();
         }
 
         // POST api/<PersonasController>
